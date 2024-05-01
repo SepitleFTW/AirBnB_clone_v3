@@ -85,12 +85,11 @@ class FileStorage:
         """
         Returns the occurrence of a class or all classes
         """
-        occurrence = 0
-        if cls:
-            if cls in classes.keys() or cls in classes.values():
-                occurrence = len(self.all(cls))
-            else:
-                return occurrence
         if not cls:
-            occurrence = len(self.all())
-        return occurrence
+            inst_of_all_cls = slef.all()
+            return len(inst_of_all_cls)
+        if cls in classes.value():
+            all_inst_of_prov_cls = self.all(cls)
+            return len(all_inst_of_prov_cls)
+        if cls not in classes.values():
+            return
