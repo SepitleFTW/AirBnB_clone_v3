@@ -86,7 +86,7 @@ class FileStorage:
         Returns the occurrence of a class or all classes
         """
         if not cls:
-            inst_of_all_cls = slef.all()
+            inst_of_all_cls = self.all()
             return len(inst_of_all_cls)
         if cls in classes.value():
             all_inst_of_prov_cls = self.all(cls)
