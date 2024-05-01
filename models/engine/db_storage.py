@@ -75,9 +75,9 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self,  cls, id):
+    def get(self, cls, id):
         """
-        get obj of class or all of that class
+        Retrieves object of a class or all objects of that class
         """
         if id and isinstance(id, str):
             if cls and (cls in classes.keys() or cls in classes.values()):
@@ -89,13 +89,12 @@ class DBStorage:
 
     def count(self, cls=None):
         """
-        return class or all classess
+        Returns the occurrence of a class or all classes
         """
-        occurence = 0
+        occurrence = 0
         if cls:
-            if cls in classes.key() or cls in classes.values():
-                occurence = len(self.all(clss))
-            if not cls:
-                occurence = len(self.all())
-            return occurence
-
+            if cls in classes.keys() or cls in classes.values():
+                occurrence = len(self.all(cls))
+        if not cls:
+            occurrence = len(self.all())
+        return occurrence
