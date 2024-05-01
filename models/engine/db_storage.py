@@ -77,24 +77,28 @@ class DBStorage:
 
     def get(self, cls, id):
         """
-        Retrieves object of a class or all objects of that class
+        get an obj from file storage by class and id
         """
-        if id and isinstance(id, str):
-            if cls and (cls in classes.keys() or cls in classes.values()):
-                all_objs = self.all(cls)
-                for key, value in all_objs.items():
-                    if id == value.id and key.split('.')[1] == id:
+        if cls and id:
+            if cls in classes.values() and isinstance(id, str):
+                all_objects = self.all(cls)
+                for key, value in all_objects.items():
+                    if key.split('.')[1] == id:
                         return value
+            else:
+                return
         return
 
     def count(self, cls=None):
         """
-        Returns the occurrence of a class or all classes
+        count the nums of objs
+        in storage in given class
         """
-        occurrence = 0
-        if cls:
-            if cls in classes.keys() or cls in classes.values():
-                occurrence = len(self.all(cls))
         if not cls:
-            occurrence = len(self.all())
-        return occurrence
+            inst_of_all_cls = self.all()
+            return len(inst_of_all_cls)
+        if cls in classes.values():
+            all_inst_of_prov_cls = self.all(cls)
+            return len(all_inst_of_prov_cls)
+        if cls not in classes.values():
+            return
