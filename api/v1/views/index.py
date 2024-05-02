@@ -5,11 +5,8 @@ flask app; app views
 from flask import jsonify
 from api.v1.views import app_views
 from models import storage
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 4db62a97956c1b98b02897d831e662dd8282c6ea
 
 @app_views.route('/status/')
 def api_status():
