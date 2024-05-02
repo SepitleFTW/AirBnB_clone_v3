@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 """python code for states
 """
-from flask import jsonfiy, abort, request
+from flask import jsonify, abort, request
+from models import storage
 from models.state import State
 from api.v1.views import app_views
 
 
-@app_views.rout('/states', strict_slashes=False)
+@app_views.route('/states', strict_slashes=False)
 def get_all_states():
     """gets list of all objects related
     to States
     """
     states = storage.all(State).values()
-    states_list = [state.to.dict() for state in states]
+    state_list = [state.to_dict() for state in states]
     return jsonify(state_list)
 
 
