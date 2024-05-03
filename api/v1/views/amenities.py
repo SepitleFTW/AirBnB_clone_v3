@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-cities are created
+amenities are created with relevent classes
 """
 from flask import jsonify, abort, request
 from models.amenity import Amenity
@@ -64,7 +64,7 @@ def create_amenity():
 
     amenity = Amenity(**data)
     amenity.save()
-    return jsonify(amenity.to_dict()), 200
+    return jsonify(amenity.to_dict()), 201
 
 
 @app_views.route('/amenities/<amenity_id>',
@@ -72,13 +72,15 @@ def create_amenity():
                  strict_slashes=False)
 def update_amenity(amenity_id):
     """
-    gets amenities
+    updates amenities
     """
     if request.content_type != 'application/json':
-        return abort(404, 'Not a JSON')
+        return abort(400, 'Not a JSON')
     if not request.get_json():
         return abort(400, 'Not a JSON')
     data = request.get_json()
+    if not data:
+        return abort(400, 'Not  JSON')
 
     amenity = storage.get(Amenity, amenity_id)
     if amenity:
