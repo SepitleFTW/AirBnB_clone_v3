@@ -89,4 +89,4 @@ def update_amenity(amenity_id):
         amenity.save()
         return jsonify(amenity.to_dict()), 200
     else:
-    return abort(404)
+        return abort(404)
