@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """new flask blueprint
+and import modules for all the tasks
 """
 from flask import Blueprint
 
