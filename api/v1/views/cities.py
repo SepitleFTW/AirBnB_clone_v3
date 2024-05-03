@@ -11,7 +11,7 @@ from api.v1.views import app_views
 
 
 @app_views.route('/states/<state_id>/cities', strict_slashes=False)
-def get_cities_by_states(city_id):
+def get_cities_by_states(state_id):
     """
     gets    a list of cities
     """
