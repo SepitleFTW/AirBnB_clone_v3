@@ -81,7 +81,7 @@ def update_city(city_id):
     updates list of cities
     """
     if request.content_type != 'application/json':
-        return abort(404, 'Not a JSON')
+        return abort(400, 'Not a JSON')
     city = storage.get(City, city_id)
     if city:
         if not request.get_json():
@@ -89,7 +89,6 @@ def update_city(city_id):
 
         data = request.get_json()
         ignore_keys = ['id', 'state_id', 'created_at', 'updated_at']
-
         for key, value in data.items():
             if key not in ignore_keys:
                 setattr(city, key, value)
