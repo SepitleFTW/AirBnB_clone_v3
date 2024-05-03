@@ -90,5 +90,3 @@ def update_user(user_id):
         return jsonify(user.to_dict()), 200
     else:
         return abort(404)
-
-
