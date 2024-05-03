@@ -14,7 +14,7 @@ def get_cities_by_states(state_id):
     """
     gets    a list of cities
     """
-    state = storage.get_state(State, state_id)
+    state = storage.get(State, state_id)
     if not state:
         return abort(404)
     cities = [city.to_dict() for city in state.cities]
