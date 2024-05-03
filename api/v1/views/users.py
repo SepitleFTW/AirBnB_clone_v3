@@ -13,7 +13,7 @@ def get_all_users():
     """
     gets amenities
     """
-    users = storage.all(User)
+    user = storage.all(User).values()
     return jsonify([user.to_dict() for user in users])
 
 
@@ -90,5 +90,5 @@ def update_user(user_id):
         return jsonify(user.to_dict()), 200
     else:
         return abort(404)
-    
+
 
