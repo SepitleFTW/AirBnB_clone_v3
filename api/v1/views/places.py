@@ -91,7 +91,7 @@ def update_place(place_id):
                 setattr(place, key, value)
 
         place.save()
-        return jsonify(place.yo_dict()), 200
+        return jsonify(place.to_dict()), 200
     else:
         return abort(404)
 
