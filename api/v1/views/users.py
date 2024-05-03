@@ -14,7 +14,7 @@ def get_all_users():
     gets amenities
     """
     user = storage.all(User).values()
-    return jsonify([user.to_dict() for user in users])
+    return jsonify([user.to_dict() for user in user])
 
 
 @app_views.route('/users/<user_id>', strict_slashes=False)
