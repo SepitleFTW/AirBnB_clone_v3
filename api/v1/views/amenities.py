@@ -8,11 +8,11 @@ from models import storage
 from api.v1.views import app_views
 
 
-@app_views.route('/amenities', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities',
+                 methods=['GET'], strict_slashes=False)
 def get_all_amenities():
     """Retrieve all amenities"""
-    amenity_list = [amenity.to_dict() for amenity in
-                    storage.all(Amenity).values()]
+    amenity_list = [amenity.to_dict() for amenity in storage.all(Amenity).values()]
     return jsonify(amenity_list)
 
 
@@ -40,11 +40,12 @@ def delete_amenity(amenity_id):
         abort(404)
 
 
-@app_views.route('/amenities', methods=['POST'], strict_slashes=False)
+@app_views.route('/amenities',
+                 methods=['POST'], strict_slashes=False)
 def create_amenity():
     """Create a new amenity"""
     if request.content_type != 'application/json':
-        return abort(400, 'Invalid content type. Please send JSON data')
+        return abort(400, 'Not a JSON')
     try:
         data = request.get_json()
     except json.JSONDecodeError:
@@ -61,11 +62,11 @@ def create_amenity():
 def update_amenity(amenity_id):
     """Update an existing amenity"""
     if request.content_type != 'application/json':
-        return abort(400, 'Invalid content type. Please send JSON data')
+        return abort(400, 'Not a JSON')
     try:
         data = request.get_json()
     except json.JSONDecodeError:
-        return abort(400, 'Invalid JSON data')
+        return abort(400, 'Not a JSON')
     if not data:
         return abort(400, 'Not a JSON')
     amenity = storage.get(Amenity, amenity_id)
