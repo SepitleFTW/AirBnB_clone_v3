@@ -34,7 +34,7 @@ def get_city(state_id):
 
 
 @app_views.route('/cities/<city_id>',methods=['DELETE'], strict_slashes=False)
-def get_city(state_id):
+def delete_city(state_id):
     """
     deletes list of cities
     """
