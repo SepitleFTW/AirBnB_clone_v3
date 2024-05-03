@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+view for places
+"""
 from flask import jsonify, abort, request
 from models.place import Place
 from models.city import City
@@ -10,7 +13,6 @@ from api.v1.views import app_views
 @app_views.route('/cities/<city_id>/places',
                  methods=['GET'], strict_slashes=False)
 def get_places_by_city(city_id):
-    """Retrieves the list of all Place objects of a City"""
     city = storage.get(City, city_id)
     if not city:
         abort(404)
@@ -21,7 +23,6 @@ def get_places_by_city(city_id):
 @app_views.route('/places/<place_id>',
                  methods=['GET'], strict_slashes=False)
 def get_place(place_id):
-    """Retrieves a Place object by ID"""
     place = storage.get(Place, place_id)
     if place:
         return jsonify(place.to_dict())
@@ -39,28 +40,29 @@ def delete_place(place_id):
         storage.save()
         return jsonify({}), 200
     else:
-        abort(404)
+        return abort(404)
 
 
 @app_views.route('/cities/<city_id>/places',
                  methods=['POST'], strict_slashes=False)
 def create_place(city_id):
     """Creates a new Place"""
-    if request.content_type != 'application/json':
-        abort(400, 'Not a JSON')
-    data = request.get_json()
-    if 'user_id' not in data:
-        abort(400, 'Missing user_id')
-    if 'name' not in data:
-        abort(400, 'Missing name')
-
     city = storage.get(City, city_id)
     if not city:
-        abort(404)
+        return abort(404)
+
+    if not request.get_json():
+        abort(400, 'Not a JSON')
+
+    data = request.get_json()
+    if 'user_id' not in data:
+        return abort(400, 'Missing user_id')
+    if 'name' not in data:
+        return abort(400, 'Missing name')
 
     user = storage.get(User, data['user_id'])
     if not user:
-        abort(404, 'User not found')
+        return abort(404)
 
     data['city_id'] = city_id
     place = Place(**data)
@@ -71,17 +73,21 @@ def create_place(city_id):
 @app_views.route('/places/<place_id>',
                  methods=['PUT'], strict_slashes=False)
 def update_place(place_id):
-    """Updates a Place object by ID"""
-    if request.content_type != 'application/json':
-        abort(400, 'Not a JSON')
+    """
+    updates place method
+    """
     place = storage.get(Place, place_id)
     if place:
+        if not request.get_json():
+            return abort(400, 'Not a JSON')
+
         data = request.get_json()
         ignore_keys = ['id', 'user_id', 'city_id', 'created_at', 'updated_at']
         for key, value in data.items():
             if key not in ignore_keys:
                 setattr(place, key, value)
+
         place.save()
-        return jsonify(place.to_dict()), 200
+        return jsonify(place.yo_dict()), 200
     else:
-        abort(404)
+        return abort(404)
