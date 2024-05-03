@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-cities are created
+cities are created and deleted as per
+request
 """
 from flask import jsonify, abort, request
 from models.state import State
@@ -10,7 +11,7 @@ from api.v1.views import app_views
 
 
 @app_views.route('/states/<state_id>/cities', strict_slashes=False)
-def get_cities_by_states(state_id):
+def get_cities_by_states(city_id):
     """
     gets    a list of cities
     """
@@ -22,7 +23,7 @@ def get_cities_by_states(state_id):
 
 
 @app_views.route('/cities/<city_id>', strict_slashes=False)
-def get_city(state_id):
+def get_city(city_id):
     """
     gets    a list of cities
     """
@@ -35,7 +36,7 @@ def get_city(state_id):
 
 @app_views.route('/cities/<city_id>',
                  methods=['DELETE'], strict_slashes=False)
-def delete_city(state_id):
+def delete_city(city_id):
     """
     deletes list of cities
     """
