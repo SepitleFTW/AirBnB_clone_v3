@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-users are created
+users are created for the specidied class
 """
 from flask import jsonify, abort, request
 from models.user import User
@@ -48,7 +48,7 @@ def delete_user(user_id):
 @app_views.route('/users',
                  methods=["POST"],
                  strict_slashes=False)
-def create_user(user_id):
+def create_user():
     """
     gets amenities
     """
@@ -75,7 +75,7 @@ def update_user(user_id):
     """
     gets amenities
     """
-    user = storage.get_user(User, user_id)
+    user = storage.get(User, user_id)
     if user:
         if not request.get_json():
             return abort(400, 'Not a JSON')
