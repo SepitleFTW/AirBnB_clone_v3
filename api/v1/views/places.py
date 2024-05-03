@@ -148,4 +148,3 @@ def places_search():
         plc_dict.pop('amenities', None)
         places.append(plc_dict)
     return jsonify(places)
-
