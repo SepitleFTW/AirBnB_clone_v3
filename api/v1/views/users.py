@@ -40,6 +40,7 @@ def delete_user(user_id):
     if user:
         storage.delete(user)
         storage.save()
+        return jsonify({}), 200
     else:
         return abort(404)
 
@@ -64,7 +65,7 @@ def create_user(user_id):
     user = User(**data)
     user.save()
 
-    return jsonify(user.to_dict()), 200
+    return jsonify(user.to_dict()), 201
 
 
 @app_views.route('/users/<user_id>',
