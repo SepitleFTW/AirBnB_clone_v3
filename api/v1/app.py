@@ -4,7 +4,7 @@ flask app; registratoin
 """
 from os import getenv
 from flask import Flask, jsonify
-from flask.cors import CORS
+from flask_cors import CORS
 from models import storage
 from api.v1.views import app_views
 
