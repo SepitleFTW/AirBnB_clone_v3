@@ -17,7 +17,7 @@ def api_status():
 
 
 @app_views.route('/stats')
-def get_status():
+def get_stats():
     """gets the status
     """
     stats = {
