@@ -71,9 +71,9 @@ def update_state(state_id):
     if state:
         if not request.get_json():
             return abort(400, 'Not a JSON')
+
         data = request.get_json()
         ignore_keys = ['id', 'created_at', 'updated_at']
-
         for key, value in data.items():
             if key not in ignore_keys:
                 setattr(state, key, value)
