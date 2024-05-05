@@ -13,7 +13,7 @@ from api.v1.views import app_views
 @app_views.route('/states/<state_id>/cities', strict_slashes=False)
 def get_cities_by_states(state_id):
     """
-    gets    a list of cities
+    gets a list of cities
     """
     state = storage.get(State, state_id)
     if not state:
@@ -25,7 +25,7 @@ def get_cities_by_states(state_id):
 @app_views.route('/cities/<city_id>', strict_slashes=False)
 def get_city(city_id):
     """
-    gets    a list of cities
+    gets a list of cities
     """
     city = storage.get(City, city_id)
     if city:
