@@ -1,6 +1,6 @@
 #!/usr/bin/python4
 """
-flask app; app views
+this if for flask app; app views
 """
 from flask import jsonify
 from api.v1.views import app_views
@@ -16,7 +16,7 @@ def api_status():
     return jsonify(response)
 
 
-@app_views.route('/api/v1/stats/details')
+@app_views.route('/api/v1/stats')
 def get_status():
     """gets the status
     """
