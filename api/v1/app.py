@@ -26,7 +26,7 @@ def teardown_engine(exception):
 def page_not_found(error):
     """error 404 message display
     """
-     return make_response(jsonify({'error': 'Not found'}), 404)
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 if __name__ == "__main__":
