@@ -60,16 +60,13 @@ def create_state():
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
-    """updates thet state
-    """
-    if request.content_type != 'application/json':
-        return abort(400, "Not a JSON")
+    """Update a State object"""
     state = storage.get(State, state_id)
     if state:
-        if not request.get_json():
-            return abort(400, 'Not a JSON')
+        data = request.json
+        if not data:
+            abort(400, 'Not a JSON')
 
-        data = request.get_json()
         ignore_keys = ['id', 'created_at', 'updated_at']
         for key, value in data.items():
             if key not in ignore_keys:
@@ -77,4 +74,4 @@ def update_state(state_id):
         state.save()
         return jsonify(state.to_dict()), 200
     else:
-        return abort(404)
+        abort(404)
