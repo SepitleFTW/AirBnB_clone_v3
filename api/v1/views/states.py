@@ -7,7 +7,8 @@ from models.state import State
 from api.v1.views import app_views
 
 
-@app_views.route('/states', strict_slashes=False)
+@app_views.route('/states',
+                 methods=['GET'], strict_slashes=False)
 def get_all_states():
     """gets list of all objects related
     to States
@@ -17,13 +18,14 @@ def get_all_states():
     return jsonify(state_list)
 
 
-@app_views.route('/states/<state_id>', strict_slashes=False)
+@app_views.route('/states/<state_id>',
+                 methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     """get the state id
     """
     state = storage.get(State, state_id)
-
     if state:
+        
         return jsonify(state.to_dict())
     else:
         return abort(404)
@@ -48,7 +50,7 @@ def create_state():
     """makes thet state
     """
     if request.content_type != 'application/json':
-        return abort(404, 'Not a JSON')
+        return abort(400, 'Not a JSON')
     if not request.get_json():
         return abort(400, 'Not a JSON')
     kwargs = request.get_json()
