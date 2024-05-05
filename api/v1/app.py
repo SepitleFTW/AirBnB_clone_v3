@@ -10,9 +10,7 @@ from api.v1.views import app_views
 
 
 app = Flask(__name__)
-
 CORS(app, resources={r'api/v1/*': {'origins': '0.0.0.0'}})
-
 app.register_blueprint(app_views)
 app.url_map.strict_slashes = False
 
@@ -25,7 +23,7 @@ def teardown_engine(exception):
 
 
 @app.errorhandler(404)
-def not_found(error):
+def page_not_found(error):
     """error 404 message display
     """
     response = {"error": "Not found"}
@@ -33,6 +31,10 @@ def not_found(error):
 
 
 if __name__ == "__main__":
-    HOST = getenv("HBNB_API_HOST", "0.0.0.0")
-    PORT = int(getenv("HBNB_API_PORT", 5000))
-    app.run(debug=True, host=HOST, port=PORT, threaded=True)
+    host = getenv('HBNB_API_HOST')
+    port = getenv('HBNB_API_PORT')
+    if not host:
+        host = '0.0.0.0'
+    if not port:
+        port = '5000'
+    app.run(host=host, port=port, threaded=True)
