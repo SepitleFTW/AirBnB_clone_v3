@@ -10,7 +10,7 @@ from models import storage
 @app_views.route('/api/v1/stats')
 def api_status():
     """
-    api statsus
+    api statusc heck
     """
     response = {'status': "OK"}
     return jsonify(response)
@@ -18,7 +18,7 @@ def api_status():
 
 @app_views.route('/stats')
 def get_stats():
-    """gets the status
+    """gets the status of the api
     """
     stats = {
         'amenities': storage.count('Amenity'),
