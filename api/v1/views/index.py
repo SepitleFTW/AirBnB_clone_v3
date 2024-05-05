@@ -16,7 +16,7 @@ def api_status():
     return jsonify(response)
 
 
-@app_views.route('/api/v1/stats')
+@app_views.route('/api/v1/stats/')
 def get_status():
     """gets the status
     """
