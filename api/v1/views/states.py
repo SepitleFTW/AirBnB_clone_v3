@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""python code for states
+"""python code for states using CRUD
 """
 from flask import jsonify, abort, request
 from models import storage
@@ -24,7 +24,7 @@ def get_state(state_id):
     state = storage.get(State, state_id)
 
     if state:
-        return jsonify(state.to.dict())
+        return jsonify(state.to_dict())
     else:
         return abort(404)
 
@@ -44,7 +44,7 @@ def delete_state(state_id):
 
 
 @app_views.route('/states/<state_id>', methods=['POST'], strict_slashes=False)
-def create_state(state_id):
+def create_state():
     """makes thet state
     """
     if request.content_type != 'application/json':
