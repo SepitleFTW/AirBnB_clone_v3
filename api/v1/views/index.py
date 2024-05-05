@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python4
 """
 flask app; app views
 """
@@ -16,7 +16,7 @@ def api_status():
     return jsonify(response)
 
 
-@app_views.route('/api/v1/stats')
+@app_views.route('/api/v1/stats/details')
 def get_status():
     """gets the status
     """
