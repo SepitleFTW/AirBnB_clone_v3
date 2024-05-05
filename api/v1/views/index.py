@@ -12,7 +12,7 @@ def api_status():
     """
     api statusc heck
     """
-    response = {'status': "OK"}
+    response = {"status": "OK"}
     return jsonify(response)
 
 
