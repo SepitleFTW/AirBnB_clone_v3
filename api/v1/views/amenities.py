@@ -12,7 +12,8 @@ from api.v1.views import app_views
                  methods=['GET'], strict_slashes=False)
 def get_all_amenities():
     """Retrieve all amenities"""
-    amenity_list = [amenity.to_dict() for amenity in storage.all(Amenity).values()]
+    amenity_list = [amenity.to_dict() for amenity in
+                    storage.all(Amenity).values()]
     return jsonify(amenity_list)
 
 
