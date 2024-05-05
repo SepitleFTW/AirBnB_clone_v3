@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-flask app; registratoin
+flask app; registratoin for the desried app
 """
 from os import getenv
 from flask import Flask, jsonify
@@ -28,7 +28,7 @@ def teardown_engine(exception):
 def not_found(error):
     """error 404 message display
     """
-    response = {"error": "Not Found"}
+    response = {"error": "Not found"}
     return jsonify(response), 404
 
 
