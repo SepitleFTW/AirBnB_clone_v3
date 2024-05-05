@@ -10,7 +10,7 @@ from models import storage
 from api.v1.views import app_views
 
 
-@app_views.route('/api/v1/states/<state_id>/cities',
+@app_views.route('/states/<state_id>/cities',
                  methods=['GET'], strict_slashes=False)
 def get_cities_by_states(state_id):
     """
@@ -23,7 +23,7 @@ def get_cities_by_states(state_id):
     return jsonify(cities)
 
 
-@app_views.route('/api/v1/cities/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['GET'], strict_slashes=False)
 def get_city(city_id):
     """
@@ -36,7 +36,7 @@ def get_city(city_id):
         return abort(404)
 
 
-@app_views.route('/api/v1/cities/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['DELETE'], strict_slashes=False)
 def delete_city(city_id):
     """
@@ -51,7 +51,7 @@ def delete_city(city_id):
         return abort(404)
 
 
-@app_views.route('/api/v1/states/<state_id>/cities',
+@app_views.route('/states/<state_id>/cities',
                  methods=['POST'],
                  strict_slashes=False)
 def create_city(state_id):
@@ -75,7 +75,7 @@ def create_city(state_id):
     return jsonify(city.to_dict()), 201
 
 
-@app_views.route('/api/v1/cities/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['PUT'],
                  strict_slashes=False)
 def update_city(city_id):
