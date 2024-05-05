@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """
 Flask route that returns json status response
