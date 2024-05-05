@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from models import storage
 
 
-@app_views.route('/api/v1/stats/')
+@app_views.route('/api/v1/stats')
 def api_status():
     """
     api statsus
@@ -16,7 +16,7 @@ def api_status():
     return jsonify(response)
 
 
-@app_views.route('/api/v1/stats/')
+@app_views.route('/api/v1/stats')
 def get_status():
     """gets the status
     """
