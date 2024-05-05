@@ -51,7 +51,7 @@ def delete_city(city_id):
         return abort(404)
 
 
-@app_views.route('/ap1/v1/states/<state_id>/cities',
+@app_views.route('/api/v1/states/<state_id>/cities',
                  methods=['POST'],
                  strict_slashes=False)
 def create_city(state_id):
@@ -75,7 +75,7 @@ def create_city(state_id):
     return jsonify(city.to_dict()), 201
 
 
-@app_views.route('/ap1/v1/cities/<city_id>',
+@app_views.route('/api/v1/cities/<city_id>',
                  methods=['PUT'],
                  strict_slashes=False)
 def update_city(city_id):
