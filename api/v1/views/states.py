@@ -1,41 +1,32 @@
 #!/usr/bin/python3
-"""python code for states using CRUD
-"""
+"""Handles CRUD operations for State objects"""
 from flask import jsonify, abort, request
 from models import storage
 from models.state import State
 from api.v1.views import app_views
 
 
-@app_views.route('/states',
-                 methods=['GET'], strict_slashes=False)
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
-    """gets list of all objects related
-    to States
-    """
+    """Retrieve all State objects"""
     states = storage.all(State).values()
     state_list = [state.to_dict() for state in states]
     return jsonify(state_list)
 
 
-@app_views.route('/states/<state_id>',
-                 methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
-    """get the state id
-    """
+    """Retrieve a State object by id"""
     state = storage.get(State, state_id)
     if state:
-
         return jsonify(state.to_dict())
     else:
-        return abort(404)
+        abort(404)
 
 
-@app_views.route('/states/<state_id>',
-                 methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
-    """deletes thet state
-    """
+    """Delete a State object"""
     state = storage.get(State, state_id)
     if state:
         storage.delete(state)
@@ -60,16 +51,13 @@ def create_state():
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
-    """updates thet state
-    """
-    if request.content_type != 'application/json':
-        return abort(400, "Not a JSON")
+    """Update a State object"""
     state = storage.get(State, state_id)
     if state:
-        if not request.get_json():
-            return abort(400, 'Not a JSON')
+        data = request.json
+        if not data:
+            abort(400, 'Not a JSON')
 
-        data = request.get_json()
         ignore_keys = ['id', 'created_at', 'updated_at']
         for key, value in data.items():
             if key not in ignore_keys:
@@ -77,4 +65,4 @@ def update_state(state_id):
         state.save()
         return jsonify(state.to_dict()), 200
     else:
-        return abort(404)
+        abort(404)
