@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from models import storage
 
 
-@app_views.route('/api/v1/status/')
+@app_views.route('/api/v1/stats/')
 def api_status():
     """
     api statsus
