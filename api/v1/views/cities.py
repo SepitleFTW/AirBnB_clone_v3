@@ -58,7 +58,7 @@ def create_city(state_id):
     """
     deletes list of cities
     """
-    if request.is.json:
+    if not request.is_json:
         return abort(404, 'Not a JSON')
     state = storage.get(State, state_id)
     if not state:
