@@ -10,7 +10,8 @@ from models import storage
 from api.v1.views import app_views
 
 
-@app_views.route('/states/<state_id>/cities', strict_slashes=False)
+@app_views.route('/states/<state_id>/cities',
+                 methods=['GET'], strict_slashes=False)
 def get_cities_by_states(state_id):
     """
     gets a list of cities
@@ -22,7 +23,8 @@ def get_cities_by_states(state_id):
     return jsonify(cities)
 
 
-@app_views.route('/cities/<city_id>', strict_slashes=False)
+@app_views.route('/cities/<city_id>',
+                 methods=['GET'], strict_slashes=False)
 def get_city(city_id):
     """
     gets a list of cities
